@@ -33,6 +33,4 @@ Le gameplay de ce jeu réside dans les choix et les calculs à effectuer afin de
 
 Au fur et à mesure qu'on avance dans le gameplay, Anastasie apprendra à l'université ou encore chez des scientifiques (ou par elle même) certains mécanismes de la réalité. Elle pourra par la suite affiner sa compréhension de ce mécanisme afin de pouvoir l'altérer (afin de créer un léger système de progression tout de même)
 
-"Oui certainement - la réalité est quelque chose de malléable."
-
-- Anastasie
+"Oui certainement - la réalité est quelque chose de malléable." - Anastasie
