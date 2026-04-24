@@ -1,0 +1,48 @@
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background: #111;
+}
+
+canvas {
+    display: block;
+}
+
+#dialogueBox {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    min-height: 120px;
+    background: rgba(0,0,0,0.8);
+    border-radius: 20px;
+    padding: 20px;
+    color: white;
+    font-family: monospace;
+    font-size: 20px;
+    display: none;
+}
+
+.choice {
+    margin-top: 10px;
+}
+
+.selected {
+    color: yellow;
+}
+
+.blue {
+    color: #4da6ff;
+}
+
+input {
+    margin-top: 10px;
+    font-size: 18px;
+}
+
+.choice span:first-child {
+    display: inline-block;
+    width: 20px;
+}
