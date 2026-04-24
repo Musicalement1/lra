@@ -29,8 +29,49 @@ Le niveau 6 est synonyme d'un pouvoir quazi-divin ici, la réalité peut être a
 
 
 
-Le gameplay de ce jeu réside dans les choix et les calculs à effectuer afin de pouvoir progresser dans la narration. Anastasie est un personnage puissant, certes, mais il faudra gérer l'énergie, les calculs, la logique, les choix que l'on fait. Sans cela, ce pouvoir restera un potentiel initilisé.
+Le gameplay de ce jeu réside dans les choix et les calculs à effectuer afin de pouvoir progresser dans la narration. Anastasie est un personnage puissant, certes, mais il faudra gérer l'énergie, les calculs, la logique, les choix que l'on fait. Sans cela, ce pouvoir restera un potentiel unitilisé.
 
 Au fur et à mesure qu'on avance dans le gameplay, Anastasie apprendra à l'université ou encore chez des scientifiques (ou par elle même) certains mécanismes de la réalité. Elle pourra par la suite affiner sa compréhension de ce mécanisme afin de pouvoir l'altérer (afin de créer un léger système de progression tout de même)
 
 "Oui certainement - la réalité est quelque chose de malléable." - Anastasie
+
+
+
+# Note de l'auteur
+
+    Cette note n'était pas destinée à être lue, vous pouvez arrêter votre lecture ici sans rien rater : il s'agit d'une réfléxion personelle que j'ai décidé d'écrire. Je l'ai d'abord mis sous la forme d'un commentaire dans le code, mais j'ai décidé finalement de la partager ici avec vous car j'ai pensé qu'elle pourrait éclairer ma vision du monde que je propose dans ce jeu. Notez tout de même que ce que vous allez lire est techniquement hors-sujet et peut tout aussi bien faire perdre votre temps; mais ce qui est intéressant c'est qu'il peut potentiellement vous en faire gagner.. si je reste vague après cette phrase, c'est intentionnel et peut-être que vous comprendrez ce à quoi je fais référence en lisant ce texte : d'autres y verront certainement déjà leur propre vision, d'autres y verront une inspiration, d'autres haïront cette vision qui n'est pas la leur.
+    Après tout, peut-être ce n'est qu'opinion.
+    Mais peut-être que ça ne l'est pas.
+    Ca, c'est votre opinion.
+
+    -------------------------------------------------------------------------------------------------------------------------------------
+
+    En réalité, ce jeu tourne plus dans le cerveau des gens que sur l'ordinateur, vous savez.
+    L'imagination crée des mondes.. je veux dire, -réellement- crée des mondes
+    Notre esprit est un monde inviolable dans lequel nous sommes un Dieu, bien réel, même si ce monde n'existe que dans nos esprits
+    Mais justement
+    Il -existe-
+    Ce serait incohérent si deux univers pourraient se superposer
+    Ce monde que je propose casse cette loi afin de proposer quelque chose de nouveau
+    Oui, vraiment, notre imagination est aussi sacré que la personne que vous formez en ce moment même.
+    Dire que l'imagination n'est que des connections neuronales est aussi réducteur de dire qu'une personne n'est qu'un tas de molécules
+    Même si ces formulations sont vraies, il y a bien plus de complexité derrière tout ça.
+    Et la complexité est le cadeau le plus beau qu'aurait pu faire un univers régi par quelques lois physiques simples.
+    L'Univers.
+    L'Emergence.
+    La vie.
+    L'Humain
+    L'Esprit.
+    L'Univers.
+    La Beauté de l'ensemble.
+    Et un jour, quelqu'un comme vous regardera cette beauté avec le sentiment d'avoir accompli quelque chose de plus grand que lui et se dira
+    "C'est beau"
+    Et ce quelqu'un, ce sera vous.
+    Un tas de molécules qui, dans la beauté du tout a pris conscience qu'il était un tas de molécules.
+    L'univers a pris vie au moment ou il a pu se regarder lui-même.
+    L'univers,
+    C'est moi,
+    C'est toi,
+    C'est nous tous.
+
+    - Musicalement1
