@@ -29,7 +29,7 @@ Le niveau 6 est synonyme d'un pouvoir quazi-divin ici, la réalité peut être a
 
 
 
-Le gameplay de ce jeu réside dans les choix et les calculs à effectuer afin de pouvoir progresser dans la narration. Anastasie est un personnage puissant, certes, mais il faudra gérer l'énergie, les calculs, la logique, les choix que l'on fait. Sans cela, ce pouvoir restera un potentiel unitilisé.
+Le gameplay de ce jeu réside dans les choix et les calculs à effectuer afin de pouvoir progresser dans la narration. Anastasie est un personnage puissant, certes, mais il faudra gérer l'énergie, les calculs, la logique, les choix que l'on fait. Sans cela, ce pouvoir restera un potentiel initilisé.
 
 Au fur et à mesure qu'on avance dans le gameplay, Anastasie apprendra à l'université ou encore chez des scientifiques (ou par elle même) certains mécanismes de la réalité. Elle pourra par la suite affiner sa compréhension de ce mécanisme afin de pouvoir l'altérer (afin de créer un léger système de progression tout de même)
 
