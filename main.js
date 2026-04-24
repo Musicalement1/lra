@@ -1,46 +1,155 @@
-async function makeDialogue(list) {
+const canvas = document.getElementById("gameCanvas");
+const ctx = canvas.getContext("2d");
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resizeCanvas);
+
+async function makeDialogue(list, vars = {}) {
     const box = document.getElementById("dialogueBox");
     box.style.display = "block";
 
     let i = 0;
-
-    function parseText(text) {
-        // §mot§ -> bleu
-        text = text.replace(/§(.*?)§/g, '<span class="blue">$1</span>');
-
-        // %variable% -> valeur JS
-        text = text.replace(/%(.*?)%/g, (_, v) => {
-            return (window[v] !== undefined) ? window[v].toString() : "";
-        });
-
-        return text;
+    function isColorName(str) {
+        const s = new Option().style;
+        s.color = str;
+        return s.color !== "";
     }
 
-    async function typeText(text) {
+    function tokensToHTML(tokens) {
+        let html = "";
+        let buffer = "";
+        let currentStyle = "";
+        let currentClass = "";
+    
+        function flush() {
+            if (!buffer) return;
+            html += `<span class="${currentClass}" style="${currentStyle}">${buffer}</span>`;
+            buffer = "";
+        }
+    
+        tokens.forEach(t => {
+            let style = JSON.stringify(t.style);
+            let cls = t.className;
+    
+            if (style !== currentStyle || cls !== currentClass) {
+                flush();
+                currentStyle = style;
+                currentClass = cls;
+            }
+    
+            buffer += t.char;
+        });
+    
+        flush();
+        return html;
+    }
+
+    function tokenize(text, vars = {}) {
+
+        //vars
+        text = text.replace(/%(.*?)%/g, (_, v) => {
+            return (vars[v] !== undefined) ? vars[v].toString() : "";
+        });
+    
+        let tokens = [];
+        let i = 0;
+    
+        while (i < text.length) {
+    
+            if (text[i] === "§") {
+                let end = text.indexOf("§", i + 1);
+                if (end === -1) break;
+    
+                let content = text.slice(i + 1, end);
+                let parts = content.split(":");
+    
+                let modifier = parts.length > 1 ? parts[0] : null;
+                let value = parts.length > 1 ? parts.slice(1).join(":") : parts[0];
+    
+                let style = {};
+                let className = "";
+    
+                if (!modifier) {
+                    style.color = "#4da6ff";
+                }
+                else if (modifier.startsWith("#") || isColorName(modifier)) {
+                    style.color = modifier;
+                }
+                else if (modifier === "b") style.fontWeight = "bold";
+                else if (modifier === "i") style.fontStyle = "italic";
+                else if (modifier === "u") style.textDecoration = "underline";
+                else if (modifier === "s") style.textDecoration = "line-through";
+                else if (!isNaN(modifier)) style.fontSize = modifier + "px";
+                else if (modifier === "obfuscate") className = "obfuscate";
+    
+                for (let c of value) {
+                    tokens.push({ char: c, style, className });
+                }
+    
+                i = end + 1;
+            }
+            else {
+                tokens.push({ char: text[i], style: {}, className: "" });
+                i++;
+            }
+        }
+    
+        return tokens;
+    }
+
+    async function typeText(tokens) {
         return new Promise(resolve => {
-            let index = 0;
+    
+            box.innerHTML = "";
             let speed = 30;
             let finished = false;
-
+    
+            let index = 0;
+    
             function write() {
-                if (index < text.length && !finished) {
-                    box.innerHTML = text.slice(0, index);
+                if (index < tokens.length && !finished) {
+    
+                    let t = tokens[index];
+    
+                    let span = document.createElement("span");
+                    span.textContent = t.char;
+    
+                    //appliquer styles
+                    Object.assign(span.style, t.style);
+                    if (t.className) span.classList.add(t.className);
+    
+                    box.appendChild(span);
+    
                     index++;
                     setTimeout(write, speed);
-                } else {
-                    box.innerHTML = text;
+                }
+                else {
+                    // finir instant
+                    for (; index < tokens.length; index++) {
+                        let t = tokens[index];
+    
+                        let span = document.createElement("span");
+                        span.textContent = t.char;
+                        Object.assign(span.style, t.style);
+                        if (t.className) span.classList.add(t.className);
+    
+                        box.appendChild(span);
+                    }
+    
                     resolve();
                 }
             }
-
+    
             function skip(e) {
                 if (e.code === "Space" || e.code === "Enter") {
                     finished = true;
                 }
             }
-
+    
             document.addEventListener("keydown", skip, { once: true });
-
+    
             write();
         });
     }
@@ -62,8 +171,8 @@ async function makeDialogue(list) {
 
         //texte simple
         if (typeof item === "string") {
-            let parsed = parseText(item);
-            await typeText(parsed);
+            let tokens = tokenize(item, vars);
+            await typeText(tokens);
             await waitSpace();
         }
 
@@ -71,7 +180,7 @@ async function makeDialogue(list) {
 
             //Input
             if (item[0] === "input") {
-                box.innerHTML = parseText(item[1]) + "<br>";
+                box.innerHTML = tokensToHTML(tokenize(item[1], vars)) + "<br>";
                 
                 let input = document.createElement("input");
                 box.appendChild(input);
@@ -98,7 +207,7 @@ async function makeDialogue(list) {
                 let selected = 0;
 
                 function renderChoices() {
-                    box.innerHTML = parseText(question) + "<br>";
+                    box.innerHTML = tokensToHTML(tokenize(question, vars)) + "<br>";
                 
                     choices.forEach((c, idx) => {
                         let div = document.createElement("div");
@@ -108,7 +217,7 @@ async function makeDialogue(list) {
                         marker.textContent = (idx === selected ? "> " : "  ");
                 
                         let text = document.createElement("span");
-                        text.innerHTML = parseText(c);
+                        text.innerHTML = tokensToHTML(tokenize(c, vars));
                 
                         div.appendChild(marker);
                         div.appendChild(text);
@@ -146,26 +255,47 @@ async function makeDialogue(list) {
 
     box.style.display = "none";
 }
+function startObfuscation() {
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
+    setInterval(() => {
+        document.querySelectorAll(".obfuscate").forEach(el => {
+            let length = el.textContent.length;
+            let newText = "";
 
+            for (let i = 0; i < length; i++) {
+                newText += chars[Math.floor(Math.random() * chars.length)];
+            }
 
+            el.textContent = newText;
+        });
+    }, 50);
+}
+startObfuscation();
 
 /*
-window.helloVariable = "Meh";
+//ptit example
+let helloVariable = "§red:Meh§";
 
 (async () => {
     let result = await makeDialogue([
         "Salut",
+        "§#123456:ee§",
+        "§i:ee§",
+        "§50:ee§",
+        "§obfuscate:ee§",
         "Tu vas §bien?§",
         "%helloVariable%",
-        ["Hey","Oui","Non","%helloVariable%"]
-    ]);
+        ["Hey","Oui","Non","%helloVariable%","§obfuscate:bruh§"]
+    ], {
+        helloVariable: helloVariable
+    });
 
     console.log(result);//0, 1 ou 2
     if (result == 1) {
         let result2 = await makeDialogue([
             "Yo pourquoi donc???",
-            ["input","Oui c'est vrai ça pourquoi donc?"]
+            ["input","Oui c'est vrai ça §red:pourquoi§ donc?"]
         ])
     }
 })();
