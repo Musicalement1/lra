@@ -29,7 +29,7 @@ Le niveau 6 est synonyme d'un pouvoir quazi-divin ici, la réalité peut être a
 
 
 
-Le gameplay de ce jeu réside dans les choix et les calculs à effectuer afin de pouvoir progresser dans la narration. Anastasie est un personnage puissant, certes, mais il faudra gérer l'énergie, les calculs, la logique, les choix que l'on fait. Sans cela, ce pouvoir restera un potentiel unitilisé.
+Le gameplay de ce jeu réside dans les choix et les calculs à effectuer afin de pouvoir progresser dans la narration. Anastasie est un personnage puissant, certes, mais il faudra gérer l'énergie, les calculs, la logique, les choix que l'on fait. Sans cela, ce pouvoir restera un potentiel initilisé.
 
 Au fur et à mesure qu'on avance dans le gameplay, Anastasie apprendra à l'université ou encore chez des scientifiques (ou par elle même) certains mécanismes de la réalité. Elle pourra par la suite affiner sa compréhension de ce mécanisme afin de pouvoir l'altérer (afin de créer un léger système de progression tout de même)
 
@@ -39,7 +39,11 @@ Au fur et à mesure qu'on avance dans le gameplay, Anastasie apprendra à l'univ
 
 # Note de l'auteur
 
-    Cette note n'était pas destinée à être lue, vous pouvez arrêter votre lecture ici sans rien rater : il s'agit d'une réfléxion personelle que j'ai décidé d'écrire. Je l'ai d'abord mis sous la forme d'un commentaire dans le code, mais j'ai décidé finalement de la partager ici avec vous car j'ai pensé qu'elle pourrait éclairer ma vision du monde que je propose dans ce jeu. Notez tout de même que ce que vous allez lire est techniquement hors-sujet et peut tout aussi bien faire perdre votre temps; mais ce qui est intéressant c'est qu'il peut potentiellement vous en faire gagner.. si je reste vague après cette phrase, c'est intentionnel et peut-être que vous comprendrez ce à quoi je fais référence en lisant ce texte : d'autres y verront certainement déjà leur propre vision, d'autres y verront une inspiration, d'autres haïront cette vision qui n'est pas la leur.
+    Cette note n'était pas destinée à être lue, vous pouvez arrêter votre lecture ici sans rien rater : il s'agit d'une réfléxion personelle que j'ai décidé d'écrire. Je l'ai d'abord
+    mis sous la forme d'un commentaire dans le code, mais j'ai décidé finalement de la partager ici avec vous car j'ai pensé qu'elle pourrait éclairer ma vision du monde que je 
+    propose dans ce jeu. Notez tout de même que ce que vous allez lire est techniquement hors-sujet et peut tout aussi bien faire perdre votre temps; mais ce qui est intéressant c'est 
+    qu'il peut potentiellement vous en faire gagner.. si je reste vague après cette phrase, c'est intentionnel et peut-être que vous comprendrez ce à quoi je fais référence en lisant
+    ce texte : d'autres y verront certainement déjà leur propre vision, d'autres y verront une inspiration, d'autres haïront cette vision qui n'est pas la leur.
     Après tout, peut-être ce n'est qu'opinion.
     Mais peut-être que ça ne l'est pas.
     Ca, c'est votre opinion.
