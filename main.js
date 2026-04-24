@@ -1,5 +1,18 @@
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
+
+const titleScreen = document.getElementById("titleScreen");
+const startBtn = document.getElementById("startBtn");
+const saveInput = document.getElementById("saveInput");
+
+startBtn.addEventListener("click", () => {
+    let state = saveInput.value || "0";
+
+    titleScreen.remove();
+
+    loadState(state);
+});
+
 function resizeCanvas() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
@@ -273,8 +286,9 @@ function startObfuscation() {
 }
 startObfuscation();
 
+
+
 /*
-//ptit example
 let helloVariable = "§red:Meh§";
 
 (async () => {
@@ -300,3 +314,41 @@ let helloVariable = "§red:Meh§";
     }
 })();
 */
+
+async function testScene() {
+    let helloVariable = "§red:Meh§";
+    let result = await makeDialogue([
+        "Salut",
+        "§#123456:ee§",
+        "§i:ee§",
+        "§50:ee§",
+        "§obfuscate:ee§",
+        "Tu vas §bien?§",
+        "%helloVariable%",
+        ["Hey","Oui","Non","%helloVariable%","§obfuscate:bruh§"]
+    ], {
+        helloVariable: helloVariable
+    });
+
+    if (result === 0) {
+        await loadState("0");
+    } else {
+        await makeDialogue(["Ok bye"]);
+    }
+}
+async function introScene() {
+
+}
+
+const states = {
+    "-1": testScene,
+    "0": introScene
+};
+
+async function loadState(state) {
+    if (states[state]) {
+        await states[state]();
+    } else {
+        await makeDialogue(["State inconnu"]);
+    }
+}
