@@ -65,3 +65,26 @@ input {
     font-size: 20px;
     margin-left: 10px;
 }
+
+#speakerBox {
+    position: absolute;
+    background: rgba(0,0,0,0.9);
+    padding: 8px 15px;
+    border-radius: 12px;
+    color: white;
+    font-family: monospace;
+    display: none;
+}
+
+#currImage {
+    position: absolute;
+    bottom: 65%;
+    right: 50%;
+    transform: translate(50%, 50%);
+    height: 50%;
+    display: none;
+}
+
+#currImage img {
+    height: 100%;
+}

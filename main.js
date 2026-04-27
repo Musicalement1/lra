@@ -53,7 +53,38 @@ function resizeCanvas() {
 }
 window.addEventListener('resize', resizeCanvas);
 
-async function makeDialogue(list, speed = 30, vars = {}) {
+
+function updateSpeakerPosition() {
+    const box = document.getElementById("dialogueBox");
+    const speakerBox = document.getElementById("speakerBox");
+
+    if (!speakerBox || speakerBox.style.display === "none") return;
+
+    const rect = box.getBoundingClientRect();
+
+    speakerBox.style.left = rect.left + "px";
+    speakerBox.style.top = (rect.top - speakerBox.offsetHeight - 8) + "px";
+}
+
+window.addEventListener("resize", updateSpeakerPosition);
+
+async function makeDialogue(list, speaker = null, img = null, speed = 30, vars = {}) {
+    const speakerBox = document.getElementById("speakerBox");
+    const currImage = document.getElementById("currImage");
+    if (speaker) {
+        speakerBox.style.display = "block";
+        speakerBox.textContent = speaker;
+        requestAnimationFrame(updateSpeakerPosition);
+    } else {
+        speakerBox.style.display = "none";
+    }
+
+    if (img) {
+        currImage.style.display = "block";
+        currImage.innerHTML = `<img src="${img}">`;
+    } else {
+        currImage.style.display = "none";
+    }
     const box = document.getElementById("dialogueBox");
     box.style.display = "block";
 
@@ -220,6 +251,7 @@ async function makeDialogue(list, speed = 30, vars = {}) {
         if (typeof item === "string") {
             let tokens = tokenize(item, vars);
             await typeText(tokens);
+            updateSpeakerPosition();
             await waitSpace();
         }
 
@@ -228,7 +260,7 @@ async function makeDialogue(list, speed = 30, vars = {}) {
             //Input
             if (item[0] === "input") {
                 box.innerHTML = tokensToHTML(tokenize(item[1], vars)) + "<br>";
-                
+                updateSpeakerPosition();
                 let input = document.createElement("input");
                 box.appendChild(input);
                 input.focus();
@@ -271,6 +303,7 @@ async function makeDialogue(list, speed = 30, vars = {}) {
                 
                         box.appendChild(div);
                     });
+                    updateSpeakerPosition();
                 }
 
                 renderChoices();
@@ -301,6 +334,8 @@ async function makeDialogue(list, speed = 30, vars = {}) {
     }
 
     box.style.display = "none";
+    speakerBox.style.display = "none";
+    currImage.style.display = "none";
 }
 function startObfuscation() {
     const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -360,7 +395,10 @@ async function testScene() {
         "Tu vas §bien?§",
         "%helloVariable%",
         ["Hey","Oui","Non","%helloVariable%","§obfuscate:bruh§"]
-    ], 30, {
+    ], 
+    "Test Guy",
+    "img/pepper.png",
+    30, {
         helloVariable: helloVariable
     });
 
@@ -637,16 +675,22 @@ async function exposition() {
         "Voir le nombre douze apparaître deux fois m'arrache un léger sourire.",
         "Il est peut-être temps d'aller chercher un sandwitch."
     ])
+    loadState("1")
 }
 
-
+async function premierCombat() {
+    await makeDialogue([
+        "WIP"
+    ])
+}
 
 
 const states = {
     "-1": testScene,
     "-2": expositionFake,
     "-3": reflexionFake,
-    "0": exposition
+    "0": exposition,
+    "1": premierCombat
 };
 
 async function loadState(state) {
