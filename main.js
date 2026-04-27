@@ -30,12 +30,19 @@
     - Musicalement1
 */
 
+
+//ctx.clearRect(0, 0, canvas.width, canvas.height); clears the whole canvas
+//canvas.width = canvas.width; too
+
+
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
 const titleScreen = document.getElementById("titleScreen");
 const startBtn = document.getElementById("startBtn");
 const saveInput = document.getElementById("saveInput");
+
+//let drawStuff = null;
 
 startBtn.addEventListener("click", () => {
     let state = saveInput.value || "0";
@@ -52,7 +59,12 @@ function resizeCanvas() {
     canvas.height = window.innerHeight;
 }
 window.addEventListener('resize', resizeCanvas);
+resizeCanvas()
 
+function resetCanvas() {
+    canvas.width = 1
+    resizeCanvas()
+}
 
 function updateSpeakerPosition() {
     const box = document.getElementById("dialogueBox");
@@ -135,7 +147,6 @@ async function makeDialogue(list, speaker = null, img = null, speed = 30, vars =
         let i = 0;
     
         while (i < text.length) {
-    
             if (text[i] === "§") {
                 let end = text.indexOf("§", i + 1);
                 if (end === -1) break;
@@ -246,7 +257,14 @@ async function makeDialogue(list, speaker = null, img = null, speed = 30, vars =
 
     while (i < list.length) {
         let item = list[i];
-
+        //eval code
+        if (typeof item === "object" && !Array.isArray(item)) {
+            item.run({
+                ctx,
+                canvas,
+                vars
+            });
+        }
         //texte simple
         if (typeof item === "string") {
             let tokens = tokenize(item, vars);
@@ -388,10 +406,42 @@ async function testScene() {
     let helloVariable = "§red:Meh§";
     let result = await makeDialogue([//on peut alternativement faire juste await makeDialogue si y a pas besoin du résultat
         "Salut",
+        {
+            run: () => {
+                console.log("ça a run, nice! en plus j'ai accès au canvas.")
+            },
+        },
         "§#123456:ee§",
+        {
+            run: ({ctx}) => {
+                ctx.beginPath();
+                ctx.moveTo(0, 0);
+                ctx.lineWidth = 10;
+                ctx.strokeStyle = "red";
+                ctx.lineTo(200, 200);
+                ctx.stroke();
+            }
+        },
+        /*{
+            run: () => {
+                drawStuff = (ctx) => {
+                    ctx.beginPath();
+                    ctx.moveTo(0, 0);
+                    ctx.lineWidth = 10;
+                    ctx.strokeStyle = "red";
+                    ctx.lineTo(200, 200);
+                    ctx.stroke();
+                };
+            }
+        },*/
         "§i:ee§",
         "§50:ee§",
         "§obfuscate:ee§",
+        {
+            run: () => {
+                resetCanvas()
+            }
+        },
         "Tu vas §bien?§",
         "%helloVariable%",
         ["Hey","Oui","Non","%helloVariable%","§obfuscate:bruh§"]
@@ -694,9 +744,21 @@ const states = {
 };
 
 async function loadState(state) {
+    console.log("Current gameState: " + state)
     if (states[state]) {
         await states[state]();
     } else {
         await makeDialogue(["State inconnu. Si vous voyez ce message, soit c'est de votre faute soit c'est de la mienne. Dans le premier cas arrêtez de vouloir faire bugger mon jeu et dans le second cas je suis désolé et je n'ai aucune idée de ce qui a pu se passer :')"]);
     }
 }
+
+
+
+/*function gameLoop() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    if (drawStuff) drawStuff(ctx);
+
+    requestAnimationFrame(gameLoop);
+}
+gameLoop();*/
