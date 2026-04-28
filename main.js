@@ -1,35 +1,13 @@
-/* 
-    En réalité, ce jeu tourne plus dans le cerveau des gens que sur l'ordinateur, vous savez.
-    L'imagination crée des mondes.. je veux dire, -réellement- crée des mondes
-    Notre esprit est un monde inviolable dans lequel nous sommes un Dieu, bien réel, même si ce monde n'existe que dans nos esprits
-    Mais justement
-    Il -existe-
-    Ce serait incohérent si deux univers pourraient se superposer
-    Ce monde que je propose casse cette loi afin de proposer quelque chose de nouveau
-    Oui, vraiment, notre imagination est aussi sacré que la personne que vous formez en ce moment même.
-    Dire que l'imagination n'est que des connections neuronales est aussi réducteur de dire qu'une personne n'est qu'un tas de molécules
-    Même si ces formulations sont vraies, il y a bien plus de complexité derrière tout ça.
-    Et la complexité est le cadeau le plus beau qu'aurait pu faire un univers régi par quelques lois physiques simples.
-    L'Univers.
-    L'Emergence.
-    La vie.
-    L'Humain
-    L'Esprit.
-    L'Univers.
-    La Beauté de l'ensemble.
-    Et un jour, quelqu'un comme vous regardera cette beauté avec le sentiment d'avoir accompli quelque chose de plus grand que lui et se dira
-    "C'est beau"
-    Et ce quelqu'un, ce sera vous.
-    Un tas de molécules qui, dans la beauté du tout a pris conscience qu'il était un tas de molécules.
-    L'univers a pris vie au moment ou il a pu se regarder lui-même.
-    L'univers,
-    C'est moi,
-    C'est toi,
-    C'est nous tous.
-
-    - Musicalement1
+/*
+    Salut! il semblerait que vous cherchez quelque chose dans ce code.
+    J'espère que vous trouverez ce que vous cherchez.
+    Mais si vous attendez des réponses..
+    Passez votre chemin.
+    Ce jeu est fait pour apporter plus de questions que de réponses.
+    C'est à vous de construire vos propres réponses.
+    Elles seront teintées d'incertitude, oui,
+    Mais elles seront certainement plus élégantes que la réalité.
 */
-
 
 //ctx.clearRect(0, 0, canvas.width, canvas.height); clears the whole canvas
 //canvas.width = canvas.width; too
@@ -728,19 +706,142 @@ async function exposition() {
     loadState("1")
 }
 
-async function premierCombat() {
+async function intermezzoSandwitch() {
+    /*await makeDialogue([//mauvais
+        "La boulangerie locale possède l'avantage de ne pas être loin.",
+        "Allions-y",
+        "Afin de planifier un itinéraire, nous représenterons une partie de la ville par des cases numérotées de A à E verticalement et de 1 à 5 horizontalement.",
+        "la case la plus haute à droite est numérotée A5",
+        "",
+        "Nous sommes dans ma demeure, qu'on "
+    ])*/
+
     await makeDialogue([
-        "WIP"
+        "La boulangerie locale possède l'avantage de ne pas être loin.",
+        "J'ai à peine marché 2 minutes et j'y suis déjà.",
+        "Mais c'est avec horreur que j'aperçoit une queue anormalement longue.",
+        "La patience est quelque chose que la vie aime mettre à l'épreuve n'est-ce pas?",
+        "Attendons.",
+        "",
+        ".",
+        "zz...",
+        "zzz..",
+        "z.",
+        "Enfin!",
+        `- Ce serait pour un sandwitch s'il vous plaît!`
     ])
+    let sandwitch = await makeDialogue([
+        ["Bien sûr! à quel goût le voulez-vous?","Poulet","Jambon","Thon","Saumon"]
+    ],
+    "Boulanger"
+    )
+    switch(sandwitch) {
+        case 0:
+            await makeDialogue(["Un sandwitch au poulet? Bien sûr! Le voici!"], "Boulanger")
+            break;
+        case 1:
+            await makeDialogue(["Un sandwitch au Jambon? Vous avez de la chance, c'est le dernier!"], "Boulanger")
+            break;
+        case 2:
+            await makeDialogue(["Un sandwitch au Thon? Avec plaisir! Le voici!"], "Boulanger")
+            break;
+        case 3:
+            await makeDialogue(["Un sandwitch au Saumon..?"], "Boulanger"),
+            await makeDialogue(["..Attendez quelques minutes il va arriver!"], "Boulanger" ,null, 60)
+            await makeDialogue(["Le voici!"], "Boulanger")
+            break;
+        default:
+            makeDialogue("La seule explication logique que j'ai sur le pourquoi vous voyez ce message en ce moment est que un rayon de soleil à changé le bit de la variable sandwitch et lui a fait prendre une valeur autre que les 4 normalement possibles. Rare occurence.")
+            break;
+    }
+    await makeDialogue(["Ca nous fera donc 1 euro 75."], "Boulanger")
+    await makeDialogue([
+        "C'est avec un estomac vide que je tends la modique somme qu'il me demandait.",
+        "Je prends avec hâte le sandwitch avec l'intention de le faire disparaître dedans.",
+        "Les rues de Paraville sont bondées à midi.",
+        "Comme à mon habitude, je vais rentrer chez moi pour le manger, ce sera plus confortable.",
+        "...",
+        "La première chose que je remarque pendant ce trajet est la quantité de gratte-ciels qu'il y a dans cette ville.",
+        `Sans mauvais jeu de mots, ils poussent comme des "petits pains"`,
+        "Il y a deux ans ce n'était que des petites maisons..",
+        "Ici à §Paraville§.",
+        "La ville a connu un véritable essor depuis que le laboratoire central de Paraville s'est lancé dans un projet de boost.",
+        "Les académies se sont rapidement installées,",
+        "Puis après les gens éspérant une autre vie.",
+        "Il en résulte une explosion démographique locale sans précédent.",
+        "..Un véritable parangon de modernité.",
+        "Un changement notable aussi est que certains bâtiments ont des murs-écrans.",
+        "Ils affichent constamment des news",
+        "C'est amusant au début mais vite lassant.",
+        "Et puis c'est bourré de publicités, mais bon..",
+        "ça aurait pu être pire.",
+        "Voyons voir ce qu'ils disent, tiens",
+        "La télé géante affiche une tête de journaliste devant un micro.",
+        `Je lis rapidement le bandeau`,
+        `"Evènement majeur" : un nouveau §i:Level 5§ a été détecté à Londres du nom de William Gehtnis. Son abilité repose principalement sur le contrôle des ondes.`,
+        "Oui, effectivement c'est un évènement plutôt rare.",
+        "Les §i:Level 5§ sont comme des stars dans ce monde",
+        "Les gens connaissent le nom des 16 premiers.",
+        "C'est fou tout de même comment la chance apporte aussi facilement la réussite d'un point de vue général.",
+        "Je suis bien placée pour le savoir.",
+        "Il y a trop de beurre dans ce sandwitch par ailleurs.",
+        "Bah..",
+        "Peu importe..",
+    ])
+    loadState("2")
 }
 
+async function combat1() {
+    await makeDialogue([
+    "Je n'aime pas prendre les petites ruelles mal éclairées.",
+    "Elles ont pourtant un charme qui leur est propre.",
+    "J'aime ça.",
+    "Le peu de monde les empruntant en fait cependant un choix idéal pour rentrer chez moi dans le calme.",
+    "être seule avec soi même est enrichissant n'est-ce pas?",
+    ])
+    await makeDialogue([
+        "§40:Au secours!!§",
+    ], "Voix d'adolescant", null, 1)
+    let res = await makeDialogue([
+        "Décidément..",
+        "J'ai parlé trop vite.",
+        "Allons voir ça, quelqu'un a besoin d'aide apparemment.",
+        "Mais que ce que..",
+        "J'assiste en réalité à une bagarre!",
+        "Trois baraqués sont autour d'un adolescent demandant de l'aide..",
+        "Ca ne sent pas bon cette histoire...",
+        ["Que faire..?", "Leur dire d'arrêter", "Les combattre" ,"Regarder de loin afin de voir de quoi il s'agit plus précisément","Manger son sanditch"]
+    ])
+
+    if (res == 3) {
+        await makeDialogue([
+            "Je prends un grand croc dans mon sandwitch.",
+            "..",
+            "Il est décidément trop beurré."
+        ])
+        let res = await makeDialogue([["Que faire..?", "Leur dire d'arrêter", "Les combattre" ,"Regarder de loin afin de voir de quoi il s'agit plus précisément"]])
+    }
+
+    switch (res) {
+        case 0://arrêtez
+        break;
+        case 2://regarder
+        break;
+    }
+    //baston
+
+    await makeDialogue([
+        ""
+    ],"Agresseur 1")
+}
 
 const states = {
     "-1": testScene,
     "-2": expositionFake,
     "-3": reflexionFake,
     "0": exposition,
-    "1": premierCombat
+    "1": intermezzoSandwitch,
+    "2": combat1
 };
 
 async function loadState(state) {
