@@ -810,9 +810,23 @@ async function combat1() {
         "J'assiste en réalité à une bagarre!",
         "Trois baraqués sont autour d'un adolescent demandant de l'aide..",
         "Ca ne sent pas bon cette histoire...",
-        ["Que faire..?", "Leur dire d'arrêter", "Les combattre" ,"Regarder de loin afin de voir de quoi il s'agit plus précisément","Manger son sanditch"]
+        ["Que faire..?", "Leur dire d'arrêter", "Les combattre" ,"Regarder de loin afin de voir de quoi il s'agit plus précisément","Manger son sanditch", "Passer son chemin"]
     ])
 
+    if (res == 4) {
+        await makeDialogue([
+            "Je tourne le dos.",
+            "L'allée sombre qui était devant moi est maintenant une avenue éclairée.",
+            "Je fais un pas vers l'avant.",
+            "...",
+            "La morale..",
+            "Si quelque idéologie doit guider une vie,",
+            "C'est certainement la morale.",
+            "Je me retourne.",
+            "Est-ce que je risque quelque chose après tout?"
+        ])
+        let res = await makeDialogue([["Que faire..?", "Leur dire d'arrêter", "Les combattre" ,"Regarder de loin afin de voir de quoi il s'agit plus précisément"]])
+    }
     if (res == 3) {
         await makeDialogue([
             "Je prends un grand croc dans mon sandwitch.",
@@ -820,19 +834,107 @@ async function combat1() {
             "Il est décidément trop beurré."
         ])
         let res = await makeDialogue([["Que faire..?", "Leur dire d'arrêter", "Les combattre" ,"Regarder de loin afin de voir de quoi il s'agit plus précisément"]])
+
+
+    
+
     }
 
     switch (res) {
         case 0://arrêtez
+            await makeDialogue([
+                "Si je vous dis d'arrêter maintenant vous le faites?"
+            ], "Anastasie")
+            await makeDialogue([
+                "Le plus grand se retourne avec un sourire presque béat."
+            ])
+            await makeDialogue([
+                "T'es qui toi?"
+            ], "Brute 1")
+            await makeDialogue([
+                "Basicalement quelqu'un qui attend une réponse."
+            ], "Anastasie")
+            await makeDialogue([
+                "Mouais..",
+                "..",
+                "La voilà ta réponse!"
+            ])
         break;
         case 2://regarder
+            await makeDialogue([
+                "J'observe la scène.",
+                "Manifestement, il s'agit d'une extortion d'argent.",
+                "Je remarque également que les trois portent une sorte de dague suspendue à leur pantalon.",
+                "Je remarque également qu'un d'entre eux remarquent ma présence.",
+                "Attends..",
+                "Quoi?!",
+                "Le plus grand s'avance vers moi.",
+                "Sa shilouette imposante fait plus d'ombre sur moi qu'il n'y en a déjà.",
+                "Bah.",
+                "Je devrais courir.",
+                "Je ne le fais pas.",
+                "En réalité..",
+                "Ils devraient courir aussi, je pense.",
+                "J'espère.",
+                "Il ne vont tout de même pas.."
+            ])
         break;
     }
     //baston
+    loadState("2")
+}
 
-    await makeDialogue([
-        ""
-    ],"Agresseur 1")
+async function vraiCombat() {
+    let res = await makeDialogue([
+        "Je vois un énorme poing foncer vers moi.",
+        "Ce qui fait la dangerosité de n'importe quel projectile,",
+        "C'est sa vitesse surtout.",
+        "Sa vitesse par rapport à la cible, qui manifestement, n'est autre que moi.",
+        "Sa masse aussi joue, mais ça..",
+        "Dans ces conditions il est préférable de modifier la vitesse n'est ce pas?",
+        "A partir du moment ou la trajectoire de mon système d'étude est prédictible..",
+        "Je peux en extraire son vecteur vitesse.",
+        "Et à partir de là, le modifier.",
+        "Prenons un moment de réfléchir un peu plus qu'un quart de seconde.",
+        "La trajectoire que suit le point ne peut pas être plus simple.",
+        "C'est une ligne droite.",
+        /*"Si je prends dans un repère orthonormé en 2D représentant le plan sur lequel le poing et le bras est..",
+        "Et que je place (0, 0) comme l'épaule droite",
+        "Je peux voir que en un quart de seconde, le poing est passé de la coordonée (0, 0) à la coordonée environ (37, 1)",*/
+        `En un quart de seconde, je constante que le bras s'est étendu de §40cm§ environ verticalement.`,
+        "Je constate aussi que l'angle le plus petit formé entre le corps et le bras est d'environ §70°§",
+        "Ces deux informations me suffisent.",
+        ["input","Quelle est la vitesse du bras en cm/s arrondi à l'unité?"]//bonne ré 170 (42.6*4)
+    ])
+    if (res == 170) {
+
+    } else {
+        await makeDialogue([
+            "%res% cm/s ?",
+            "...",
+            "Ca ne semble pas..",
+            "Le poing s'abat sur ma tête.",
+            "Mes yeux se ferment sur un monde.",
+        ], null, null, null, {res: res}),
+        gameOver()
+    }
+
+}
+
+async function gameOver() {
+    let res = await makeDialogue([
+        "§red:Game Over§",
+        `Il semblerait que dans cet avenir je suis sacrément "endommagée"`,
+        "Je pourrais essayer de modifier la réalité de telle façon à ce que l'univers revienne exactement à l'instant avant cet incident.",
+        [
+            "Que faire?",
+            "Faisons ça. (Retourner à la dernière sauvegarde)",
+            "Ce monde cessera d'exister §i:temporairement§. (Retourner à l'écran titre)"
+        ]
+    ])
+    if (res == 0) {
+        loadState(cgstate)
+    }
 }
 
 const states = {
@@ -841,11 +943,15 @@ const states = {
     "-3": reflexionFake,
     "0": exposition,
     "1": intermezzoSandwitch,
-    "2": combat1
+    "2": combat1,
+    "3": vraiCombat
 };
 
+var cgstate = 0
 async function loadState(state) {
+    cgstate = state
     console.log("Current gameState: " + state)
+
     if (states[state]) {
         await states[state]();
     } else {
